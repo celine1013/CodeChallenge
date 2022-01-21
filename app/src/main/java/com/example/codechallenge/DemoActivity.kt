@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.codechallenge.databinding.ActivityDemoBinding
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 
 
@@ -17,9 +18,10 @@ class DemoActivity : AppCompatActivity() {
         binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[CurrencyViewModel::class.java]
+        binding.fragmentContainerView.visibility = View.VISIBLE
 
         binding.sortBtn.setOnClickListener {
-            //todo: sort the list
+            viewModel.sortCurrencyList()
         }
     }
 

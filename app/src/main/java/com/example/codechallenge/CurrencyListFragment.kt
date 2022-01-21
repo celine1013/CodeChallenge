@@ -17,7 +17,7 @@ class CurrencyListFragment : Fragment() {
     private var _binding: FragmentCurrencyListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: CurrencyListAdapter
+    private lateinit var currencyListAdapter: CurrencyListAdapter
     private lateinit var viewModel: CurrencyViewModel
 
     override fun onCreateView(
@@ -42,22 +42,26 @@ class CurrencyListFragment : Fragment() {
         binding.currencyListRecycler.addItemDecoration(
             DividerItemDecoration(requireActivity(), layout.orientation)
         )
-        adapter = CurrencyListAdapter{currencyInfo ->
+        currencyListAdapter = CurrencyListAdapter { currencyInfo ->
 
         }
+        binding.currencyListRecycler.adapter = currencyListAdapter
 
         viewModel.currencyListLiveData.observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Success ->{
-                    adapter.data = it.data
+                    currencyListAdapter.data = it.data
                     binding.progressBar.visibility = View.GONE
+                    binding.errorMsg.visibility = View.GONE
                 }
                 is Resource.Failure ->{
                     binding.progressBar.visibility = View.GONE
-                    //todo: error msg
+                    binding.errorMsg.text = it.throwable.localizedMessage ?: getString(R.string.load_currency_error)
+                    binding.errorMsg.visibility = View.GONE
                 }
                 is Resource.Loading ->{
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.errorMsg.visibility = View.GONE
                 }
             }
         }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CodeChallenge</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="load_currency_error">Failed to load currency data.</string>
 </resources>

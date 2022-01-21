@@ -1,6 +1,7 @@
 package com.example.codechallenge.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codechallenge.databinding.CurrencyItemBinding
@@ -34,10 +35,18 @@ class CurrencyListAdapter(
     inner class ViewHolder(binding: CurrencyItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         private val name = binding.currencyName
+        private val symbol = binding.symbol
         private val sectionLayout = binding.root
 
         fun onBind(currencyInfo: CurrencyInfo) {
             name.text = currencyInfo.name
+            if(currencyInfo.symbol.isNotBlank()) {
+                symbol.text = currencyInfo.symbol[0].toString()
+                symbol.visibility = View.VISIBLE
+            } else {
+                symbol.visibility = View.INVISIBLE
+            }
+
             sectionLayout.setOnClickListener {
                 itemClickListener(currencyInfo)
             }

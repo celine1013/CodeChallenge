@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 
 class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
     private val currencyRepo: CurrencyRepo = CurrencyRepo.getInstance(application.applicationContext)
-    private val sortStatusLiveData = MutableLiveData<SortingOrder>(SortingOrder.UNSORTED)
+    private val sortStatusLiveData = MutableLiveData(SortingOrder.UNSORTED)
 
     val currencyListLiveData: LiveData<Resource<List<CurrencyInfo>>> = Transformations.switchMap(sortStatusLiveData) { sortingOrder->
         liveData {
@@ -18,5 +18,14 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
                 currencyRepo.getCurrencyListFlow(sortingOrder).asLiveData(viewModelScope.coroutineContext)
             )
         }
+    }
+
+    fun sortCurrencyList() {
+        val newOrder = when(sortStatusLiveData.value) {
+            SortingOrder.UNSORTED -> SortingOrder.ASC
+            SortingOrder.ASC -> SortingOrder.DESC
+            else -> SortingOrder.UNSORTED //DESC
+        }
+        sortStatusLiveData.postValue(newOrder)
     }
 }
