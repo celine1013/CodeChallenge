@@ -47,22 +47,26 @@ class CurrencyListFragment : Fragment() {
         }
         binding.currencyListRecycler.adapter = currencyListAdapter
 
-        viewModel.currencyListLiveData.observe(viewLifecycleOwner){
+        viewModel.getCurrencyListLiveData().observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Success ->{
                     currencyListAdapter.data = it.data
                     binding.progressBar.visibility = View.GONE
                     binding.errorMsg.visibility = View.GONE
+                    binding.currencyListRecycler.visibility = View.VISIBLE
                 }
                 is Resource.Failure ->{
                     binding.progressBar.visibility = View.GONE
+                    binding.currencyListRecycler.visibility = View.INVISIBLE
                     binding.errorMsg.text = it.throwable.localizedMessage ?: getString(R.string.load_currency_error)
                     binding.errorMsg.visibility = View.GONE
                 }
                 is Resource.Loading ->{
                     binding.progressBar.visibility = View.VISIBLE
                     binding.errorMsg.visibility = View.GONE
+                    binding.currencyListRecycler.visibility = View.INVISIBLE
                 }
+                else -> {}
             }
         }
 

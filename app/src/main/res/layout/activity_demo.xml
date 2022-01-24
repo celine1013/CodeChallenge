@@ -21,15 +21,18 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:text="Name"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
         <ImageView
             android:id="@+id/sortBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_sort_by_alpha_24" />
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:src="@drawable/ic_sort_unordered"/>
 
     </LinearLayout>
 
