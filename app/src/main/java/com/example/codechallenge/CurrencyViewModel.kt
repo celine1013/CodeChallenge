@@ -37,6 +37,10 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
         currencyListLiveData.postValue(currencyRepo.getCurrencyList())
     }
 
+    fun showCurrencyDetails(currencyInfo: CurrencyInfo) {
+        //todo: show single currency details
+    }
+
     init {
         refreshCurrencyList() //initialize currencyList
     }

@@ -43,7 +43,7 @@ class CurrencyListFragment : Fragment() {
             DividerItemDecoration(requireActivity(), layout.orientation)
         )
         currencyListAdapter = CurrencyListAdapter { currencyInfo ->
-
+            viewModel.showCurrencyDetails(currencyInfo)
         }
         binding.currencyListRecycler.adapter = currencyListAdapter
 
