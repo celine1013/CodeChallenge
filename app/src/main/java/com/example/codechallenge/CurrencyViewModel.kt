@@ -6,6 +6,7 @@ import com.example.codechallenge.model.CurrencyInfo
 import com.example.codechallenge.model.SortingOrder
 import com.example.codechallenge.repo.CurrencyRepo
 import com.example.codechallenge.repo.Resource
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
@@ -34,6 +35,7 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
         if (currencyListLiveData.value is Resource.Loading) return@launch
 
         currencyListLiveData.postValue(Resource.Loading())
+        delay(3000L) //mimicking a very long wait for the data
         currencyListLiveData.postValue(currencyRepo.getCurrencyList())
     }
 

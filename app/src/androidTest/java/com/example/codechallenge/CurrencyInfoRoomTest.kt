@@ -7,7 +7,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 @ExperimentalCoroutinesApi
 class CurrencyInfoRoomTest : ModelDbTest<CurrencyInfo?>() {
@@ -62,14 +61,6 @@ class CurrencyInfoRoomTest : ModelDbTest<CurrencyInfo?>() {
     override fun checkPOJO(retrieved: CurrencyInfo?) {
         assertNotNull(retrieved)
         checkCurrencyInfo(currencyInfo, retrieved!!)
-    }
-
-    @Test
-    fun testPrepopulateData()= testScope.runBlockingTest {
-        val existing = currencyDao.getCurrency("BTC")
-        assertNotNull(existing)
-        assertEquals("Bitcoin", existing!!.name)
-        assertEquals("BTC", existing.symbol)
     }
 
     companion object{

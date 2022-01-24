@@ -41,12 +41,7 @@ android {
         useIR = true
     }
     buildFeatures {
-        compose true
         viewBinding true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion kotlin_version
     }
     packagingOptions {
         resources {
